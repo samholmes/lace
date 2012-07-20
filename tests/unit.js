@@ -11,11 +11,11 @@ log('before lace');
 lace
 (function(){
 	log('initial');
-	lace.next(1, 2, 3);
+	lace.helper.next(1, 2, 3);
 })
 (function(){
 	log('passed arguments: ', arguments);
-	lace.next.call({foo:'bar'}, 4, 5, 6);
+	lace.helper.next.call({foo:'bar'}, 4, 5, 6);
 })
 (function(){
 	log('context and arguments: ', this, arguments);
@@ -24,11 +24,11 @@ lace
 	lace
 	(function(){
 		log('inner initial');
-		lace.next(123);
+		lace.helper.next(123);
 	})
 	(function(){
 		log('inner passed arguments', arguments);
-		lace.next.call({foo:'bar'}, 456);
+		lace.helper.next.call({foo:'bar'}, 456);
 	})
 	(function(){
 		log('inner context and arguments: ', this, arguments);
