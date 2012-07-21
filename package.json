@@ -2,7 +2,7 @@
   "author": "Sam Holmes (http://github.com/samholmes)",
   "name": "lace",
   "description": "A clean asynchronous control flow utility.",
-  "version": "0.1-alpha",
+  "version": "0.1.0-alpha",
   "repository": {
     "type": "git",
     "url": "https://github.com/samholmes/lace"
