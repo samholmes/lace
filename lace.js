@@ -29,27 +29,34 @@ var extract = function(base){
 // initial is the first function in the lacing.
 var craft = function(initial){
 	var lacing = []; // Contains a series of all of the function sets
-	var index = 0; // Used to determine where the execution is in the lacing.
-	
+		
 	// Helper is a local created for each lacing.
 	// It provides controls during the lacing invocation.
 	var helper = {
 		// Executes the first function in the next function set in the lacing.
-		next: function(){
-			// Extract and cache the current lace
-			var oldLace = extract(lace);
-			// Give lace the properties of the local helper
-			extend(lace, helper);
-			// Invoke the next function in the set
-			lacing[index++][0].apply(this, arguments);
-			// Remove the properties of the local helper from lace
-			contract(lace, helper);
-			// Give lace it's previous properties
-			extend(lace, oldLace);
-		},
+		next: (function makeNext(index){
+			return function(){
+				// Extract and cache the current lace
+				var oldLace = extract(lace);
+				// Set helper.next to a next function with an incremented index
+				helper.next = makeNext(index+1);
+				// Give lace the properties of the local helper
+				extend(lace, helper);
+				// Invoke the next function in the set
+				lacing[index][0].apply(this, arguments);
+				// Remove the properties of the local helper from lace
+				contract(lace, helper);
+				// Set helper.next back to previous index
+				helper.next = makeNext(index);
+				// Give lace it's previous properties
+				extend(lace, oldLace);
+			};
+		})(0),
 		 // Reference the outer scope.
 		outer: extract(lace)
 	};
+	
+	
 	
 	
 	// Adds a set of functions to the lacing.
