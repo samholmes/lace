@@ -7,9 +7,16 @@
     "type": "git",
     "url": "https://github.com/samholmes/lace"
   },
-  "main": "lace.js",
+  "main": "index.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "testling": "git://github.com/Raynos/testling#master",
+    "testem": "git://github.com/Raynos/testem#master",
+    "tap": "git://github.com/Raynos/node-tap"
+  },
+  "scripts": {
+    "test": "make node-test"
+  },
   "optionalDependencies": {},
   "engines": {
     "node": "*"
