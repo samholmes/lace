@@ -1,6 +1,6 @@
 # lace
 
-Lace is a control flow library that doesn't get in your way. Here's how it works
+Lace is a control flow library that doesn't get in your way. Here's how it works:
 
 	// Require the lib
 	var lace = require('lace');
@@ -10,20 +10,20 @@ Lace is a control flow library that doesn't get in your way. Here's how it works
 	(function(){
 		// Within each of these functions are some helpers contained in the lace global.
 		lace.next(); // This calls the next function in the series.
-	}) // Lace supports currying to create the lacing.
+	}) // Lace uses currying to create the lacing.
 	(function(){
 		// Helpers are also available here.
-		// All arguments are directly from the invocation of the previous lace.next (no appending or prepending of arguments).
-		// The `this` context will be what the context of lace.next's context was applied to.
+		// All arguments are directly from the invocation of the previous lace.next (no appending or prepending of helper arguments).
+		// The `this` context will be what lace.next was applied to.
 		
 		// Inner lacings are supported
 		lace
 		(function(){
-			// Helpers will work reference the inner lacing
+			// Helpers will reference the inner lacing
 			lace.next();
 		})
 		(function(){
-			// Access to the outer lace is done through the lace.outer helper property
+			// Access to the outer lace helper is done through the lace.outer helper property
 			lace.outer.next();
 		});
 	})
@@ -36,14 +36,16 @@ Lace is all about asynchronous control flow. You can pass lace.next to asynchron
 
 Another thing to keep in mind, is that the first function is called asynchronously:
 
-	console.log('Called before initial lacing function.');
+	console.log('A');
 	
 	lace
 	(function(){
-		console.log('Initial lacing funciton.');
+		console.log('C');
 	})
 	
-	console.log('Also, called before initial lacing function.')
+	console.log('B')
+	
+	// Will output A B C
 
 
 ## Terminology
