@@ -93,6 +93,8 @@ DocProject/Help/*.hhp
 DocProject/Help/Html2
 DocProject/Help/html
 
+node_modules
+
 # Click-Once directory
 publish
 
